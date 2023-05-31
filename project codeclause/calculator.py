@@ -1,49 +1,48 @@
-#This function adds two numbers
-def add(a,b):
-    return a + b
+from tkinter import *                                                   
 
-#This function subtract two numbers
-def subtract(a,b):
-   return a - b
-
-#This function multiplies two numbers
-def multiply(a,b):
-    return a * b
-#This function divides two numbers
-def divides(x,y):
-    return x/y
-
-print("Select operation." )
-print("1.Add")
-print("2.Subtract")
-print("3.Multiply")
-print("4.Divide")
-
-while True:
-    choice = input("Enter choice(1/2/3/4): ")
-
-    if choice in ('1', '2', '3','4'):
-        try:
-            num1 = float(input("Enter first number: "))
-            num2 = float(input("Enter second number: "))
-        except ValueError:
-            print("Invalid input. Please enter a number.")
-            continue
-
-        if choice == '1':
-            print(num1, "+", num2, "=", add(num1, num2))
-
-        elif choice == '2':
-            print(num1, "-", num2, "=" ,subtract(num1, num2))
-
-        elif choice == '3':
-            print(num1, "*",num2, "=" , multiply(num1, num2))
-
-        elif choice =='4':
-            print(num1,"/",num2, "=" , divides(num1, num2))
+def btnClick(numbers):                                                   
+    global operator                                                     
+    operator = operator + str(numbers)
+    text_Input.set(operator)                                            
     
-        next_calculation = input("Let's do next calculation? (yes/no): ")
-        if next_calculation =="no":
-            break
-    else:
-         print("Invalid Input")
+def btnClear():                                                         
+    global operator
+    operator=""
+    text_Input.set("")                                                  
+
+def btnEquals():
+    global operator
+    sumup=str(eval(operator))                                           
+    text_Input.set(sumup)                                               
+    operator=""                                                         
+    
+cal = Tk()                                                              
+cal.title("Calculator")                                                 
+operator=""
+text_Input= StringVar()
+
+
+
+txtDisplay = Entry(cal, font=('arial', 20,"bold"), textvariable=text_Input, bd=30, insertwidth=4,bg="powder blue", justify="right").grid(columnspan=4)
+
+btn7=Button(cal,padx=16,bd=8, fg="black",font=('arial',20,'bold'),text="7", command=lambda:btnClick(7), bg="powder blue").grid(row=1,column=0)
+btn8=Button(cal,padx=16,bd=8, fg="black",font=('arial',20,'bold'),text="8", command=lambda:btnClick(8),bg="powder blue").grid(row=1,column=1)
+btn9=Button(cal,padx=16,bd=8, fg="black",font=('arial',20,'bold'),text="9",command=lambda:btnClick(9),bg="powder blue").grid(row=1,column=2)
+btn_add=Button(cal,padx=16,bd=8, fg="black",font=('arial',20,'bold'),text="+",command=lambda:btnClick("+"),bg="powder blue").grid(row=1,column=3)
+
+btn4=Button(cal,padx=16,bd=8, fg="black",font=('arial',20,'bold'),text="4",command=lambda:btnClick(4),bg="powder blue").grid(row=2,column=0)
+btn5=Button(cal,padx=16,bd=8, fg="black",font=('arial',20,'bold'),text="5",command=lambda:btnClick(5),bg="powder blue").grid(row=2,column=1)
+btn6=Button(cal,padx=16,bd=8, fg="black",font=('arial',20,'bold'),text="6",command=lambda:btnClick(6),bg="powder blue").grid(row=2,column=2)
+btn_times=Button(cal,padx=16,bd=8, fg="black",font=('arial',20,'bold'),text="",command=lambda:btnClick(""),bg="powder blue").grid(row=2,column=3)
+
+btn1=Button(cal,padx=16,bd=8, fg="black",font=('arial',20,'bold'),text="1",command=lambda:btnClick(1),bg="powder blue").grid(row=3,column=0)
+btn2=Button(cal,padx=16,bd=8, fg="black",font=('arial',20,'bold'),text="2",command=lambda:btnClick(2),bg="powder blue").grid(row=3,column=1)
+btn3=Button(cal,padx=16,bd=8, fg="black",font=('arial',20,'bold'),text="3",command=lambda:btnClick(3),bg="powder blue").grid(row=3,column=2)
+btn_minus=Button(cal,padx=16,bd=8, fg="black",font=('arial',20,'bold'),text="-",command=lambda:btnClick("-"),bg="powder blue").grid(row=3,column=3)
+
+btn0=Button(cal,padx=16,pady=16,bd=8, fg="black",font=('arial',20,'bold'),text="0",command=lambda:btnClick(0),bg="powder blue").grid(row=4,column=0)
+btn_clear=Button(cal,padx=16,pady=16,bd=8, fg="black",font=('arial',20,'bold'),text="C",bg="powder blue",command=btnClear).grid(row=4,column=1)
+btn_equals=Button(cal,padx=16,pady=16,bd=8, fg="black",font=('arial',20,'bold'),text="=",bg="powder blue",command=btnEquals).grid(row=4,column=2)
+btn_div=Button(cal,padx=16,pady=16,bd=8, fg="black",font=('arial',20,'bold'),text="/",command=lambda:btnClick("/"),bg="powder blue").grid(row=4,column=3)
+
+cal.mainloop()
